@@ -1,0 +1,52 @@
+#:import Toolbar kivymd.toolbar.Toolbar
+#:import SingleLineTextField kivymd.textfields.SingleLineTextField
+#:import MDFloatingActionButton kivymd.button.MDFloatingActionButton
+ScreenDamager:
+	Screen1:
+		name:'screen1'
+		BoxLayout:
+			orientation: 'vertical'
+			Toolbar:
+				id: toolbar
+				title: 'BookFinder'
+				background_color: app.theme_cls.accent_dark
+			GridLayout:
+				padding:10
+				spacing:10
+				cols:2
+				SingleLineTextField:
+					id:_search_text
+					hint_text:'Search Books...'	
+				MDFloatingActionButton:
+					size_hint:None,None
+					size:40,40
+					icon:'search'
+					on_release:self.parent.parent.parent.search(root.ids._search_text.text)
+	Screen2:
+		name:'screen2'	
+	Screen3:
+		name:'screen3'		
+	Loading:
+		name:'loading'
+		BoxLayout:
+			canvas:
+				Color:
+					rgba:(0,0,0,1)
+				Rectangle:
+					size:self.size		
+		
+<MyLayout>:
+	orientation: 'vertical'
+	Toolbar:
+		id: toolbar
+		title: 'BookFinder'
+		background_color: app.theme_cls.accent_dark
+		left_action_items: [['arrow-left', lambda x: app.root.prev_result()]]
+		right_action_items: [['arrow-right', lambda x: app.root.next_result()]]
+<ReadLayout>:
+	orientation: 'vertical'
+	Toolbar:
+		id: toolbar
+		title: 'BookFinder'
+		background_color: app.theme_cls.accent_dark
+		left_action_items: [['arrow-left', lambda x: app.root.change_screen('screen2')]]
